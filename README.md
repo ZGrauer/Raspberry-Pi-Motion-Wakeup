@@ -41,7 +41,32 @@ Add the `--release` flag to the to build command to compile for production. This
 cargo build --release
 ```
 
-Then copy the executable to your Rapsberry Pi and run.
+Then copy the executable to your Rapsberry Pi and run.  Example:
+
+```shell
+$ ./rpi-motion-wakeup
+PIR motion sensor on BCM GPIO pin 8
+Press CTRL + C to exit
+2020-05-14T22:33:44.372234277+00:00    |   Watching for motion...
+2020-05-14T22:34:11.400648480+00:00    |   Motion detected, turning display on...
+display_power=1
+display_power=0
+2020-05-14T22:36:27.658764601+00:00    |   Motion detected, turning display on...
+display_power=1
+display_power=0
+```
+
+## Disable the Screensaver
+
+This app doesn't deactivate the default screensaver on the Pi. For this app to work properly you must disable the screensaver.  There are a [couple ways to do this](https://www.raspberrypi.org/documentation/configuration/screensaver.md) but the easiest method is this:
+
+1. Install `xscreensaver`
+
+```shell
+sudo apt install xscreensaver
+```
+
+2. Find the screensaver application under the `Preferences` option on the main desktop menu, then disable it.
 
 ## Authors
 
