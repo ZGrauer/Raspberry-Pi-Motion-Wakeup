@@ -62,13 +62,6 @@ fn handle_event(level: Level) {
     let now: DateTime<Utc> = Utc::now();
     if level == Level::High {
         println!("{}    |   Motion detected, turning display on...", now.to_rfc3339());
-        //Wake up. Deactivate the simple built-in X-window screensaver
-        let _screensaver_status = Command::new("xset")
-            .arg("s")
-            .arg("reset")
-            .current_dir("/usr/bin")
-            .status()
-            .expect("'xset s reset' command failed!");
         // Power on display
         let status = Command::new("vcgencmd")
             .arg("display_power")
@@ -94,7 +87,5 @@ fn handle_event(level: Level) {
         if !status.success() {
             println!("{}    |   display_power commmand unsucessful", now.to_rfc3339());
         }
-        // TO turn on screensaver now...  'xset s activate'
-        // Reactivate with 'xset s on s 60'
     }
 }
