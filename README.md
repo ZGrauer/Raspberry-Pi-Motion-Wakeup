@@ -16,6 +16,7 @@ You must have Rust installed and cross-compilation configured for a Raspberry Pi
 ### Compilation for Raspberry Pi
 
 1. Clone this repository using the [instructions from GitHub](https://help.github.com/articles/cloning-a-repository/)
+    `https://github.com/ZGrauer/Raspberry-Pi-Motion-Wakeup.git`
 2. Update the `BCM_PIN` pin constant in `main.rs` with the input pin from your motion sensor.  See below.
 3. Run this command from the project directory to build for a Pi.  See `./target/armv7-unknown-linux-gnueabihf/` for the compiled executable.
 
@@ -47,6 +48,8 @@ Then copy the executable to your Rapsberry Pi and run.
 [@ZGrauer](https://github.com/ZGrauer).
 
 ## Contribute
+
+Feel free to dive in! [Open an issue](https://github.com/ZGrauer/Raspberry-Pi-Motion-Wakeup/issues/new/choose) or submit PRs.
 
 Raspberry Pi Motion Wakeup follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
