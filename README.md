@@ -1,6 +1,6 @@
 # Raspberry Pi Motion Wakeup
 
-A native app written using [Rust](https://www.rust-lang.org/) that turns a [Raspberry Pi's](https://www.raspberrypi.org/) display on/off using data from GPIO pin.  This app enables a [PIR motion sensor](http://www.image.micros.com.pl/_dane_techniczne_auto/cz%20am312.pdf) connected to the Pi's [GPIO pins](https://www.raspberrypi.org/documentation/hardware/raspberrypi/gpio/README.md) to turn its display on/off based on movement.  The display is powered on for a minimum duration specified in the app. This app can be auto-launched along with [Tapslist.io](https://taplist.io/help/raspberry-pi-setup) to create an auto-dimming beer tap display.
+A native app written using [Rust](https://www.rust-lang.org/) that turns a [Raspberry Pi's](https://www.raspberrypi.org/) display on/off using data from GPIO pin.  This app enables a [PIR motion sensor](http://www.image.micros.com.pl/_dane_techniczne_auto/cz%20am312.pdf) connected to the Pi's [GPIO pins](https://www.raspberrypi.org/documentation/hardware/raspberrypi/gpio/README.md) to turn its display on/off based on movement.  The display is powered off only when there has been a minimum duration of no movement detected. This app can be auto-launched along with [Tapslist.io](https://taplist.io/help/raspberry-pi-setup) to create an auto-dimming beer tap display.
 
 ## Getting Started
 
@@ -47,12 +47,12 @@ Then copy the executable to your Rapsberry Pi and run.  Example:
 $ ./rpi-motion-wakeup
 PIR motion sensor on BCM GPIO pin 8
 Press CTRL + C to exit
-2020-05-14T22:33:44.372234277+00:00    |   Watching for motion...
-2020-05-14T22:34:11.400648480+00:00    |   Motion detected, turning display on...
+2020-05-15T18:34:37.851751162+00:00    |   Watching for motion...
+2020-05-15T18:34:55.392830162+00:00    |   Motion detected!
+2020-05-15T18:34:55.392927548+00:00    |   Powering display on
 display_power=1
-display_power=0
-2020-05-14T22:36:27.658764601+00:00    |   Motion detected, turning display on...
-display_power=1
+2020-05-15T18:35:04.774342873+00:00    |   No Motion
+2020-05-15T18:35:35.364244063+00:00    |   Powering display off
 display_power=0
 ```
 
