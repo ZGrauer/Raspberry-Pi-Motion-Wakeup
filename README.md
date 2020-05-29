@@ -33,6 +33,15 @@ Update the below line in `main.rs` with the pin number for the PIR sensor.  This
 const BCM_PIN: u8 = 8;
 ```
 
+### Optional Display Off Timeout
+
+Launching the app with args `-t <seconds>` or `--timeout <seconds>` configures the seconds with no motion detected before the display is powered off.  These do not need to be included when launching the app.  If not included, then the default of 30 seconds is used.
+
+```shell
+rpi-motion-wakeup -t 60
+```
+
+
 ## Deployment
 
 Add the `--release` flag to the to build command to compile for production. This optimizes artifacts for production. See `./target/armv7-unknown-linux-gnueabihf/` for the compiled executable.

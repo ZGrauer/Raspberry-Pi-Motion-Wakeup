@@ -6,8 +6,6 @@ use std::process::Command;
 use std::error::Error;
 use chrono::{DateTime, Local};
 
-// Number of min seconds the display should be on after motion is detected
-const SCREEN_TIMEOUT : i64 = 30;
 // Last time display was powered on/off in seconds since 1970 
 static mut LAST_ON_TIME: i64 = 0;
 static mut LAST_OFF_TIME: i64 = 0;
@@ -35,13 +33,14 @@ macro_rules! debug {
 /// # Arguments
 /// 
 /// * `bcm_pin` - BCM pin number to watch for motion
+/// * `screen_timeout` - Number of seconds of no motion detected before the display is turned off
 /// 
 /// # Example usage
 /// 
 /// ```
 /// pi::watch_for_motion(BCM_PIN)
 /// ```
-pub fn watch_for_motion(bcm_pin: u8) -> Result<(), Box<dyn Error>> {
+pub fn watch_for_motion(bcm_pin: u8, screen_timeout: i64) -> Result<(), Box<dyn Error>> {
     let now: DateTime<Local> = Local::now();
     let gpio = Gpio::new()?;
     let pin = gpio.get(bcm_pin)?;
@@ -50,16 +49,16 @@ pub fn watch_for_motion(bcm_pin: u8) -> Result<(), Box<dyn Error>> {
     let _result = InputPin::clear_async_interrupt(&mut input_pin);
     let _result = InputPin::set_async_interrupt(&mut input_pin, Trigger::Both, handle_event)?;
     println!("{}    |   Watching for motion...", now.to_rfc3339());
-    debug!(format!("{}    |   No motion timeout before power off {} seconds", now.to_rfc3339(), SCREEN_TIMEOUT));
+    debug!(format!("{}    |   No motion timeout before power off {} seconds", now.to_rfc3339(), screen_timeout));
     // Infinite loop to keep app alive
     loop {
         let now: DateTime<Local> = Local::now();
         // If there has been no motion detected for at least 30 seconds
         // And the display is currently on
         unsafe {
-            if (now.timestamp() - NO_MOTION_TIME) > SCREEN_TIMEOUT && LAST_ON_TIME > LAST_OFF_TIME  {
+            if (now.timestamp() - NO_MOTION_TIME) > screen_timeout && LAST_ON_TIME > LAST_OFF_TIME  {
                 let pin_level = input_pin.read();
-                debug!(format!("{}    |   No motion in last {} seconds.  Pin Level: {:?}", now.to_rfc3339(), SCREEN_TIMEOUT, pin_level));
+                debug!(format!("{}    |   No motion in last {} seconds.  Pin Level: {:?}", now.to_rfc3339(), screen_timeout, pin_level));
                 // If there is still no movement
                 if pin_level == Level::Low {
                     power_display(false);
