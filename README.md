@@ -8,7 +8,7 @@ A native app written using [Rust](https://www.rust-lang.org/) that turns a [Rasp
 
 You must have Rust installed and cross-compilation configured for a Raspberry Pi.
 
-1. Download and install [Rust](https://www.rust-lang.org/tools/install) using these [instructions](https://docs.npmjs.com/getting-started/installing-node).
+1. Download and install [Rust](https://www.rust-lang.org/tools/install) using these [instructions](https://forge.rust-lang.org/infra/other-installation-methods.html).
 2. Setup cross-compilation for Raspberry Pi as needed.
     * Instructions for MacOS & Win 10 can be [found here](https://dev.to/h_ajsf/cross-compiling-rust-for-raspberry-pi-4iai).
     * Instructions for Linux can be [found here](https://hackernoon.com/compiling-rust-for-the-raspberry-pi-49fdcd7df658)
